@@ -11,16 +11,36 @@ import static java.lang.Integer.valueOf;
 public class Monedas  {
 
 
+
+
     private Map<String, Double> conversion_rates;
 
     public Map<String, Double> getConversion_rates() {
         return conversion_rates;
 
         }
-
         private double dolar;
 
-    private double cop;
+         private double ars;
+         private double cop;
+
+         private double brl;
+
+    public double getBrl() {
+        return brl;
+    }
+
+    public void setBrl(double brl) {
+        this.brl = brl;
+    }
+
+    public void setArs(double ars) {
+        this.ars = ars;
+    }
+
+    public double getArs() {
+        return ars;
+    }
 
     public void setCop(double cop) {
         this.cop = cop;
@@ -65,9 +85,13 @@ public class Monedas  {
         Map<String, Double> conversionRates =response.getConversion_rates();
         Double cop = conversionRates.get("COP");
         Double usd = conversionRates.get("USD");
+        Double ars = conversionRates.get("ARS");
+        Double brl = conversionRates.get("BRL");
 
         this.setDolar(usd);
         this.setCop(cop);
+        this.setArs(ars);
+        this.setBrl(brl);
     }
 }
 
