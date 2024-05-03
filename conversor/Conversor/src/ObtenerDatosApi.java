@@ -27,6 +27,8 @@ public class ObtenerDatosApi extends Monedas {
         this.setCop(response.getConversion_rates().get("COP"));
         this.setArs(response.getConversion_rates().get("ARS"));
         this.setBrl(response.getConversion_rates().get("BRL"));
+        this.setClp(response.getConversion_rates().get("CLP"));
+        this.setMxn(response.getConversion_rates().get("MXN"));
     }
 
 }

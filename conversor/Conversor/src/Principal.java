@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.lang.invoke.VarHandle;
 import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.Map;
@@ -24,28 +25,42 @@ public class Principal {
                         conversorDeDolarAPesoArgemtino(monedas, lectura , numeroDecimal);
                         break;
                     case 2:
-
-                      conversorDePesoArgentinoADolar(monedas, lectura , numeroDecimal);
+                        conversorDePesoArgentinoADolar(monedas, lectura , numeroDecimal);
                             break;
                         case 3:
                             conversorDeDolarARealBrasileño(monedas, lectura, numeroDecimal);
                             break;
                         case 4:
-                      conversordeRealBrasileñoADolar(monedas, lectura, numeroDecimal);
+                            conversordeRealBrasileñoADolar(monedas, lectura, numeroDecimal);
                            break;
                          case 5:
-                      conversorDolarAPesoCop(monedas, lectura , numeroDecimal);
+                             conversorDolarAPesoCop(monedas, lectura , numeroDecimal);
+                            break;
+                        case 6:
+                             converdPesoCopADolar(monedas, lectura , numeroDecimal);
+                        break;
+                    case 7:
+                        conversorDeDolarAPesoChileno(monedas, lectura , numeroDecimal);
                       break;
-                    case 6:
-                        converdPesoCopADolar(monedas, lectura , numeroDecimal);
-                        case 7:
+                    case 8:
+                        conversorDePesoChilenoADolar(monedas , lectura , numeroDecimal);
+                        break;
+                    case 9:
+                        conversorDeDolarAPesoMexicano(monedas, lectura , numeroDecimal);
+                        break;
+                    case 10:
+                        conversorDePesoMexicanoADolar(monedas, lectura , numeroDecimal);
+                        break;
+                        case 11:
                         System.out.println("Gracias por utilizar el conversor de monedas");
                         break;
                     default:
                         System.out.println("Ingrese una opcion Valida");
-                }
-            }while (elecion !=7);
+                        break;
 
+                }
+            }while (elecion !=11);
+  
             lectura.close();
     }catch (IOException | InterruptedException e) {
             e.printStackTrace();
@@ -59,7 +74,11 @@ private static  void mostrarMenu(){
     System.out.println("4) Real Brasileñor  ==>> A Dolar ");
     System.out.println("5) Dolar  ==>> A Peso Colombiano ");
     System.out.println("6) Peso Colombiano  ==>> A Dolar ");
-    System.out.println("7) Salir ");
+    System.out.println("7) Dolar ==>> A Peso Chileno ");
+    System.out.println("8) Peso Chileno ==>> A Dolar ");
+    System.out.println("9) Dolar ==>> A Peso Mexicano");
+    System.out.println("10) Peso Mexicano ==>> A Dolar ");
+    System.out.println("11) Salir ");
 }
 
 private static void conversorDeDolarAPesoArgemtino(Monedas monedas, Scanner lectura , DecimalFormat numeroDecimal){
@@ -136,14 +155,61 @@ private static void converdPesoCopADolar (Monedas monedas, Scanner lectura , Dec
     double valorenDolar = valorenPesoCop / cop;
     String valorFormateado= numeroDecimal.format(valorenDolar);
     if (valorenPesoCop >= 50){
-        System.out.println("El valor de  " + valorenPesoCop + "Pesos Colombianos equivale en Dolares A " + valorFormateado + "$ Dolares" );
+        System.out.println("El valor de  " + valorenPesoCop + "Pesos Colombianos equivale en Dolares A " + valorFormateado + " $ Dolares" );
     }else {
         System.out.println("ingresa un valor valido");
     }
+    }
+private static void conversorDeDolarAPesoChileno(Monedas monedas, Scanner lectura , DecimalFormat numeroDecimal){
+        double clp = monedas.getClp();
+    System.out.println("Ingresa el valor que desea convvertir de Dolar  A Peso Chileno");
+    double valorDolar = lectura.nextDouble();
+    double valorPesoChileno = valorDolar * clp;
+    String valorFormateado = numeroDecimal.format(valorPesoChileno);
+    if (valorDolar >= 1) {
+        System.out.println("El valor " + valorDolar + " Dolares ingresados equivalen A " + valorFormateado+ " Pesos Chilenos");
+    }else {
+        System.out.println("Ingrse un ValOR Valido");
+    }
+}
+private static void conversorDePesoChilenoADolar(Monedas monedas, Scanner lectura, DecimalFormat numeroDecimal){
+        double clp = monedas.getClp();
+    System.out.println("Ingresa el valor que desea convertir de PesoChileno A Dolar");
+    double valorPesoChileno = lectura.nextDouble();
+    double valorDolar = valorPesoChileno / clp;
+    String valotFormateado =numeroDecimal.format(valorDolar);
+    if ( valorPesoChileno >= 1){
+        System.out.println("El valor " + valorPesoChileno + " ingresado equivale A " + valotFormateado + "$ Dolares");
 
-
+    }else {
+        System.out.println("Ingresa un valor valido");
     }
 
+}
+private static void conversorDeDolarAPesoMexicano(Monedas monedas, Scanner lectura, DecimalFormat numeroDecimal){
+        double mxn = monedas.getMxn();
+    System.out.println("Ingresa el valor que desea convvertir de Dolar  A Peso Mexicano");
+        double valorDolar = lectura.nextDouble();
+        double valorPesoMexicano = valorDolar * mxn;
+        String valorFormateado = numeroDecimal.format(valorPesoMexicano);
+    if (valorDolar >= 10) {
+        System.out.println("El valor " + valorDolar + " Dolares ingresados equivalen A " + valorFormateado+ " Pesos Mexicanos");
+    }else {
+        System.out.println("Ingresa un valor valido");
+    }
+}
+private static void conversorDePesoMexicanoADolar(Monedas monedas, Scanner lectura, DecimalFormat numeroDecimal){
+
+        double mxn = monedas.getMxn();
+    System.out.println("Ingresa el valor que desea convertir de Peso Mexicano A Dolar");
+        double valorPesoMexicano = lectura.nextDouble();
+        double valorDolar = valorPesoMexicano / mxn;
+        String valorFormateado = numeroDecimal.format(valorDolar);
+        if (valorPesoMexicano >= 1){
+            System.out.println("El valor " + valorPesoMexicano + " Peso Mexicano equivale A " + valorFormateado + "$ Dolares");
+    }
+
+    }
 
 }
 

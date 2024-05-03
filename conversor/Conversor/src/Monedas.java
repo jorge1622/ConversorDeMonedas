@@ -20,6 +20,27 @@ public class Monedas  {
 
          private double brl;
 
+         private double clp;
+
+         private double mxn;
+
+    public void setClp(double clp) {
+        this.clp = clp;
+    }
+
+    public void setMxn(double mxn) {
+        this.mxn = mxn;
+    }
+
+    public double getMxn() {
+        return mxn;
+    }
+
+    public double getClp() {
+        return clp;
+    }
+
+
     public double getBrl() {
         return brl;
     }
